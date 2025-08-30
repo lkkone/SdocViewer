@@ -1,0 +1,22 @@
+services:
+  sdoc-viewer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=production
+    ports:
+      - "3002:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - JWT_SECRET=your-production-jwt-secret-change-this
+    volumes:
+      - ./files:/app/files
+      - ./users.json:/app/users.json
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/api/verify"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
