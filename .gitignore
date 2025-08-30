@@ -1,3 +1,7 @@
+# 忽略文件和用户数据
+files/
+users.json
+
 # 依赖目录
 node_modules/
 client/node_modules/
