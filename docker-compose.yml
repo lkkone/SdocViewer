@@ -6,7 +6,7 @@ services:
       args:
         - NODE_ENV=production
     ports:
-      - "3002:3001"
+      - "0.0.0.0:3003:3001"
     environment:
       - NODE_ENV=production
       - PORT=3001
