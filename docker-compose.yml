@@ -16,7 +16,7 @@ services:
       - ./users.json:/app/users.json
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/api/verify"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://0.0.0.0:3001/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3

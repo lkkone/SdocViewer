@@ -74,8 +74,6 @@ function App() {
     confirmPassword: ''
   });
   
-
-  
   const fileContentRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 

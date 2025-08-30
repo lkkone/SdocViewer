@@ -24,7 +24,7 @@
   "devDependencies": {
     "nodemon": "^3.0.2"
   },
-  "keywords": ["memo", "markdown", "secure", "viewer"],
+  "keywords": ["sdoc-viewer", "markdown", "secure", "viewer", "document-viewer"],
   "author": "Your Name",
   "license": "MIT"
 }

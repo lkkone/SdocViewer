@@ -15,7 +15,10 @@ const PORT = process.env.PORT || 3001;
 
 // 安全中间件
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: true, // 允许所有来源
+  credentials: true // 允许携带凭证
+}));
 app.use(express.json());
 
 // 速率限制 - 放宽限制
@@ -265,6 +268,11 @@ app.put('/api/files/:filename', authenticateToken, async (req, res) => {
   }
 });
 
+// 健康检查端点（不需要认证）
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // 验证令牌端点
 app.get('/api/verify', authenticateToken, (req, res) => {
   res.json({ valid: true, user: req.user });
@@ -435,7 +443,6 @@ app.post('/api/users/:username/reset-password', authenticateToken, async (req, r
   }
 });
 
-
 // 静态文件服务
 app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -444,7 +451,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`服务器运行在端口 ${PORT}`);
   console.log(`访问 http://localhost:${PORT} 查看应用`);
+  console.log(`本机IP访问: http://你的IP:${PORT}`);
 });

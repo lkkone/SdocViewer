@@ -1,6 +1,6 @@
 # 📚 SdocViewer
 
-一个现代化的、安全的Markdown文档查看器，支持多用户管理、文件编辑、主题切换等功能。
+一个现代化的、安全的Markdown文档查看器，支持多用户管理、文件编辑、主题切换等功能。项目采用Docker容器化部署，支持HTTP和HTTPS访问。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -63,8 +63,8 @@
 
 1. **克隆项目**
 ```bash
-git clone https://github.com/yourusername/sdoc-viewer.git
-cd sdoc-viewer
+git clone https://github.com/lkkone/SdocViewer.git
+cd SdocViewer
 ```
 
 2. **启动服务**
@@ -99,7 +99,7 @@ cd client && npm start
 ## 📁 项目结构
 
 ```
-document-viewer/
+SdocViewer/
 ├── client/                 # 前端React应用
 │   ├── public/            # 静态资源
 │   ├── src/               # 源代码
@@ -112,6 +112,7 @@ document-viewer/
 ├── docker-compose.yml      # Docker编排配置
 ├── Dockerfile              # Docker镜像配置
 ├── users.json              # 用户数据文件
+├── .gitignore              # Git忽略文件
 └── README.md               # 项目说明
 ```
 
@@ -125,6 +126,11 @@ document-viewer/
 - `files/`: 文档文件存储目录
 - `users.json`: 用户数据文件
 - `docker-compose.yml`: 容器配置
+
+### 端口配置
+- **容器内部端口**: 3001
+- **宿主机端口**: 3003
+- **支持访问**: localhost:3003 和本机IP:3003
 
 ## 📖 使用说明
 
@@ -163,10 +169,10 @@ document-viewer/
 
 ## 🐳 Docker部署
 
-### 生产环境部署
+### 一键部署
 ```bash
 # 构建并启动
-docker-compose -f docker-compose.prod.yml up --build -d
+docker-compose up --build -d
 
 # 查看日志
 docker-compose logs -f
@@ -174,6 +180,11 @@ docker-compose logs -f
 # 停止服务
 docker-compose down
 ```
+
+### 访问地址
+- **本地访问**: http://localhost:3003
+- **本机IP访问**: http://你的IP:3003
+- **HTTPS代理**: 可在前面配置Nginx等反向代理
 
 ### 数据持久化
 - 用户数据: `./users.json` → `/app/users.json`
@@ -218,10 +229,20 @@ docker-compose down
 
 ## 📞 联系我们
 
-- 项目地址: [https://github.com/yourusername/document-viewer](https://github.com/yourusername/document-viewer)
-- 问题反馈: [Issues](https://github.com/yourusername/document-viewer/issues)
-- 功能建议: [Discussions](https://github.com/yourusername/document-viewer/discussions)
+- 项目地址: [https://github.com/lkkone/SdocViewer](https://github.com/lkkone/SdocViewer)
+- 问题反馈: [Issues](https://github.com/lkkone/SdocViewer/issues)
+- 功能建议: [Discussions](https://github.com/lkkone/SdocViewer/discussions)
 
 ---
 
 ⭐ 如果这个项目对你有帮助，请给我们一个星标！
+
+---
+
+## 🔒 安全说明
+
+- 用户密码使用 bcrypt 加密存储
+- JWT token 认证机制
+- 基于角色的访问控制
+- 请求频率限制保护
+- 敏感文件通过 .gitignore 保护
